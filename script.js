@@ -1,391 +1,363 @@
-/* =========================================================
-   PORTFOLIO JAVASCRIPT (PRODUCTION FIXED VERSION)
-   ========================================================= */
+// ===============================
+// Portfolio Script.js
+// Image Slider + Navigation + Effects
+// ===============================
 
-document.addEventListener("DOMContentLoaded", () => {
 
-  /* =========================================================
-     ELEMENT REFERENCES
-     ========================================================= */
-  const landingPage = document.getElementById("landing-page");
-  const overlay = document.getElementById("overlay");
-  const container = document.getElementById("landing-text");
-  const cursor = document.getElementById("cursor");
+// ---------- Mobile Menu Toggle ----------
+const menuBtn = document.querySelector(".menu-btn");
+const navMenu = document.querySelector(".nav-links");
 
-  /* =========================================================
-     LANDING TEXT CONTENT
-     ========================================================= */
-  const lines = ["WELCOME", "TO", "MY PORTFOLIO"];
-  let index = 0;
-
-  /* =========================================================
-     TEXT ANIMATION (LANDING PAGE)
-     ========================================================= */
-  if (container) {
-
-    container.innerHTML = "";
-
-    lines.forEach(line => {
-
-      const div = document.createElement("div");
-
-      line.split("").forEach(char => {
-
-        const span = document.createElement("span");
-
-        span.innerText = char;
-        span.style.display = "inline-block";
-        span.style.opacity = "0";
-        span.style.transform = "translateY(40px)";
-        span.style.animation = "rise 0.6s forwards";
-        span.style.animationDelay = (index * 0.08) + "s";
-
-        div.appendChild(span);
-        index++;
-      });
-
-      container.appendChild(div);
+if (menuBtn && navMenu) {
+    menuBtn.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
     });
-  }
-
-  /* =========================================================
-     SAFE KEYFRAME INJECTION (PREVENT DUPLICATE)
-     ========================================================= */
-  if (!document.getElementById("rise-style")) {
-
-    const style = document.createElement("style");
-
-    style.id = "rise-style";
-    style.innerHTML = `
-      @keyframes rise {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-          text-shadow: 0 0 5px #fff, 0 0 10px #ff4d4d;
-        }
-      }
-    `;
-
-    document.head.appendChild(style);
-  }
-
-  /* =========================================================
-     FIREWORK SYSTEM
-     ========================================================= */
-  function createFirework() {
-
-    const count = 12;
-
-    const x = Math.random() * window.innerWidth;
-    const y = Math.random() * window.innerHeight * 0.5;
-
-    for (let i = 0; i < count; i++) {
-
-      const fw = document.createElement("div");
-      fw.className = "firework";
-
-      fw.style.left = x + "px";
-      fw.style.top = y + "px";
-
-      const angle = Math.random() * Math.PI * 2;
-      const distance = 50 + Math.random() * 50;
-
-      fw.style.setProperty("--dx", Math.cos(angle) * distance + "px");
-      fw.style.setProperty("--dy", Math.sin(angle) * distance + "px");
-
-      document.body.appendChild(fw);
-
-      setTimeout(() => fw.remove(), 1000);
-    }
-  }
-
-  /* FIREWORK LOOP */
-  const fireworkInterval = setInterval(createFirework, 400);
-
-  /* =========================================================
-     CURSOR EFFECT (DESKTOP ONLY)
-     ========================================================= */
-  if (cursor) {
-
-    document.addEventListener("mousemove", (e) => {
-
-      cursor.style.left = e.clientX + "px";
-      cursor.style.top = e.clientY + "px";
-    });
-  }
-
-  /* =========================================================
-     LANDING EXIT CONTROL
-     ========================================================= */
-  setTimeout(() => {
-
-    clearInterval(fireworkInterval);
-
-    /* SHOW OVERLAY FADE */
-    if (overlay) {
-      overlay.classList.add("active");
-    }
-
-    setTimeout(() => {
-
-      if (landingPage) {
-
-        landingPage.style.opacity = "0";
-        landingPage.style.transition = "0.6s ease";
-        landingPage.style.pointerEvents = "none";
-
-        setTimeout(() => {
-
-          landingPage.style.display = "none";
-
-          document.body.classList.remove("landing-active");
-          document.body.style.overflow = "";
-
-          if (overlay) {
-            overlay.classList.remove("active");
-          }
-
-        }, 600);
-      }
-
-    }, 500);
-
-  }, 3000);
-
-});
-
-/* =========================================================
-   TYPEWRITER EFFECT (NAME + SKILLS LOOP)
-   ========================================================= */
-
-const titleText = "Data Analyst";
-const skillsText = "SQL • Power BI • Excel • Tableau • Data Visualization";
-
-const titleElement = document.getElementById("typing-title");
-const skillsElement = document.getElementById("typing-skills");
-
-const totalDuration = 2500;
-const pauseDuration = 2500;
-
-const titleSpeed = totalDuration / titleText.length;
-const skillsSpeed = totalDuration / skillsText.length;
-
-/* TYPE FUNCTION */
-function typeText(element, text, speed, callback) {
-
-  if (!element) return;
-
-  let index = 0;
-  element.innerHTML = "";
-
-  function type() {
-
-    if (index < text.length) {
-
-      element.innerHTML += text.charAt(index);
-      index++;
-
-      setTimeout(type, speed);
-
-    } else {
-
-      if (callback) callback();
-    }
-  }
-
-  type();
 }
 
-/* LOOP FUNCTION */
-function startTypingLoop() {
 
-  typeText(titleElement, titleText, titleSpeed, () => {
+// ---------- Smooth Scrolling ----------
+document.querySelectorAll("a[href^='#']").forEach(link => {
 
-    typeText(skillsElement, skillsText, skillsSpeed, () => {
+    link.addEventListener("click", function(e){
 
-      setTimeout(() => {
+        const target = document.querySelector(this.getAttribute("href"));
 
-        if (titleElement) titleElement.innerHTML = "";
-        if (skillsElement) skillsElement.innerHTML = "";
+        if(target){
+            e.preventDefault();
 
-        startTypingLoop();
-
-      }, pauseDuration);
-
-    });
-
-  });
-}
-
-/* START TYPEWRITER ON LOAD */
-window.addEventListener("load", () => {
-  startTypingLoop();
-});
-
-/* =========================================================
-   COUNTER + SCROLL ANIMATION (STATS SECTION)
-   ========================================================= */
-
-const counters = document.querySelectorAll(".counter");
-
-function animateCounter(counter) {
-  const target = +counter.getAttribute("data-target");
-
-  let current = 0;
-  const duration = 1200;
-  const startTime = performance.now();
-
-  function update(now) {
-    const progress = Math.min((now - startTime) / duration, 1);
-
-    current = Math.floor(progress * target);
-    counter.innerText = current;
-
-    if (progress < 1) {
-      requestAnimationFrame(update);
-    } else {
-      counter.innerText = target + "+";
-    }
-  }
-
-  requestAnimationFrame(update);
-}
-
-/* SCROLL LOOP */
-const statsSection = document.getElementById("stats");
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-
-      counters.forEach(counter => {
-        counter.innerText = "0";
-      });
-
-      counters.forEach(counter => {
-        animateCounter(counter);
-      });
-
-    }
-  });
-}, { threshold: 0.5 });
-
-observer.observe(statsSection);
-
-
-
-/* =========================
-   LOADER WITH PROGRESS + %
-   ========================= */
-
-/* =========================
-   SAFE CLICK LOADER 
-   ========================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  const cards = document.querySelectorAll(".project-card");
-
-  cards.forEach(card => {
-
-    card.addEventListener("click", function (e) {
-
-      e.preventDefault(); // stop instant redirect
-
-      const url = this.getAttribute("href");
-
-      /* CREATE LOADER */
-      const loader = document.createElement("div");
-      loader.id = "click-loader";
-
-      loader.innerHTML = `
-        <div class="loader-text">Loading...</div>
-        <div class="loader-bar">
-          <div class="loader-progress"></div>
-        </div>
-        <div class="loader-percent">0%</div>
-      `;
-
-      document.body.appendChild(loader);
-      document.body.style.overflow = "hidden";
-
-      let progressValue = 0;
-
-      const progress = loader.querySelector(".loader-progress");
-      const percent = loader.querySelector(".loader-percent");
-
-      const speed = 12; // ~1.2 sec
-
-      const interval = setInterval(() => {
-
-        progressValue++;
-
-        progress.style.width = progressValue + "%";
-        percent.innerText = progressValue + "%";
-
-        if (progressValue >= 100) {
-          clearInterval(interval);
-
-          /* SMALL DELAY FOR SMOOTHNESS */
-          setTimeout(() => {
-            window.location.href = url;
-          }, 200);
+            target.scrollIntoView({
+                behavior:"smooth"
+            });
         }
 
-      }, speed);
+    });
+
+});
+
+
+
+// ===============================
+// PROJECT IMAGE SLIDER
+// ===============================
+
+const sliders = document.querySelectorAll(".project-slider");
+
+
+sliders.forEach(slider => {
+
+    const images = slider.querySelectorAll("img");
+    let index = 0;
+
+
+    if(images.length > 0){
+
+        images.forEach(img=>{
+            img.style.display="none";
+        });
+
+
+        images[0].style.display="block";
+
+
+        setInterval(()=>{
+
+
+            images[index].style.display="none";
+
+
+            index++;
+
+            if(index >= images.length){
+                index=0;
+            }
+
+
+            images[index].style.display="block";
+
+
+        },3000);
+
+    }
+
+});
+
+
+
+// ===============================
+// PRESENTATION PDF IMAGE SLIDER
+// ===============================
+
+
+const presentationSlider = document.querySelector(".presentation-slider");
+
+
+if(presentationSlider){
+
+    const slides = presentationSlider.querySelectorAll("img");
+
+    let currentSlide = 0;
+
+
+    slides.forEach((slide)=>{
+        slide.style.display="none";
+    });
+
+
+    if(slides.length > 0){
+
+        slides[0].style.display="block";
+
+
+        setInterval(()=>{
+
+
+            slides[currentSlide].classList.remove("active");
+
+
+            slides[currentSlide].style.display="none";
+
+
+            currentSlide++;
+
+
+            if(currentSlide >= slides.length){
+                currentSlide=0;
+            }
+
+
+            slides[currentSlide].style.display="block";
+
+            slides[currentSlide].classList.add("active");
+
+
+        },4000);
+
+    }
+
+}
+
+
+
+// ===============================
+// Scroll To Top Button
+// ===============================
+
+
+const topButton = document.querySelector("#scrollTop");
+
+
+if(topButton){
+
+
+    window.addEventListener("scroll",()=>{
+
+        if(window.scrollY > 300){
+
+            topButton.style.display="block";
+
+        }
+        else{
+
+            topButton.style.display="none";
+
+        }
 
     });
 
-  });
-
-});
 
 
+    topButton.addEventListener("click",()=>{
 
+        window.scrollTo({
 
+            top:0,
 
-/* =========================
+            behavior:"smooth"
 
-   CORE SKILLS ANIMATION
+        });
 
-   ========================= */
+    });
 
-const skills = document.querySelectorAll(".skill-pro");
-
-let current = 0;
-
-function activateSkill(index) {
-  skills.forEach(skill => skill.classList.remove("active"));
-  skills[index].classList.add("active");
 }
 
-setInterval(() => {
-  current = (current + 1) % skills.length;
-  activateSkill(current);
-}, 1200);
 
-activateSkill(current);
 
-/* ========================= */
-/* MAGNETIC EFFECT */
-/* ========================= */
+// ===============================
+// Navbar Active Section Highlight
+// ===============================
 
-skills.forEach(skill => {
-  const circle = skill.querySelector(".circle");
 
-  skill.addEventListener("mousemove", (e) => {
-    const rect = skill.getBoundingClientRect();
+const sections = document.querySelectorAll("section");
 
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+const navLinks = document.querySelectorAll(".nav-links a");
 
-    const moveX = (x - rect.width / 2) / 12;
-    const moveY = (y - rect.height / 2) / 12;
 
-    circle.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
-  });
+window.addEventListener("scroll",()=>{
 
-  skill.addEventListener("mouseleave", () => {
-    circle.style.transform = "translate(0,0) scale(1)";
-  });
+
+    let current="";
+
+
+    sections.forEach(section=>{
+
+
+        const sectionTop = section.offsetTop - 100;
+
+
+        if(scrollY >= sectionTop){
+
+            current = section.getAttribute("id");
+
+        }
+
+    });
+
+
+
+    navLinks.forEach(link=>{
+
+
+        link.classList.remove("active");
+
+
+        if(link.getAttribute("href") === "#" + current){
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+
 });
+
+
+
+// ===============================
+// Typing Effect (Hero Section)
+// ===============================
+
+
+const textElement = document.querySelector(".typing-text");
+
+
+if(textElement){
+
+
+    const texts=[
+
+        "Data Analyst",
+
+        "Power BI Developer",
+
+        "SQL Developer",
+
+        "Business Analyst"
+
+    ];
+
+
+    let textIndex=0;
+
+    let charIndex=0;
+
+
+    function typing(){
+
+
+        if(charIndex < texts[textIndex].length){
+
+
+            textElement.innerHTML += texts[textIndex].charAt(charIndex);
+
+            charIndex++;
+
+            setTimeout(typing,120);
+
+
+        }
+
+        else{
+
+
+            setTimeout(erase,1500);
+
+        }
+
+    }
+
+
+
+    function erase(){
+
+
+        if(charIndex > 0){
+
+
+            textElement.innerHTML = texts[textIndex].substring(0,charIndex-1);
+
+            charIndex--;
+
+            setTimeout(erase,70);
+
+
+        }
+
+        else{
+
+
+            textIndex++;
+
+
+            if(textIndex >= texts.length){
+
+                textIndex=0;
+
+            }
+
+
+            setTimeout(typing,300);
+
+        }
+
+    }
+
+
+    typing();
+
+}
+
+
+
+// ===============================
+// Image Lazy Loading
+// ===============================
+
+
+const images = document.querySelectorAll("img");
+
+
+images.forEach(img=>{
+
+    img.setAttribute(
+        "loading",
+        "lazy"
+    );
+
+});
+
+
+
+// ===============================
+// Footer Year Auto Update
+// ===============================
+
+
+const year = document.querySelector("#year");
+
+
+if(year){
+
+    year.innerHTML = new Date().getFullYear();
+
+}
