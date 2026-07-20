@@ -1,764 +1,443 @@
 /* =========================================================
-   THEME VARIABLES
+   PORTFOLIO STYLE.CSS
+   Generated starter stylesheet
+   Replace/extend as needed.
    ========================================================= */
-:root {
-  --bg: #eeeeee;
-  --text: #000;
-  --card: #ffffff;
-  --primary: #d62828;
-}
-
-/* Dark Mode Theme */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #121212;
-    --text: #ffffff;
-    --card: #1e1e1e;
-    --primary: #ff4d4d;
-  }
-}
-
-/* =========================================================
-   GLOBAL RESET
-   ========================================================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Prevent horizontal scroll */
-html,
-body {
-  overflow-x: hidden;
-}
-
-/* =========================================================
-   BODY
-   ========================================================= */
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  scroll-behavior: smooth;
-}
-
-/* =========================================================
-   GLOBAL IMAGE SETTINGS
-   ========================================================= */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* =========================================================
-   NAVBAR (FIXED FOR ALL DEVICES)
-   ========================================================= */
-nav {
-  color: #ffffff;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: var(--primary);
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* FIXED */
-
-  padding: 12px 6%;
-  z-index: 1000;
-
-  flex-wrap: wrap;
-}
-
-/* Logo */
-.logo {
-  color: #ffffff;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-/* Navigation Links */
-.nav-links {
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-}
-
-.nav-links a {
-  color: #ffffff;
-  text-decoration: none;
-  transition: 0.3s ease;
-}
-
-/* Hover effect */
-.nav-links a:hover {
-  opacity: 0.8;
-}
-
-/* =========================================================
-   HERO SECTION
-   ========================================================= */
-#home {
-  height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  text-align: center;
-  gap: 10px;
-  padding: 20px;
-}
-
-#home h1 {
-  font-size: 45px;
-}
-
-#home h2 {
-  color: var(--primary);
-}
-
-/* Typewriter cursor */
-.typing-cursor::after {
-  content: "|";
-  margin-left: 5px;
-  animation: blink 0.8s infinite;
-}
-
-@keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-/* =========================================================
-   PROFILE IMAGE
-   ========================================================= */
-.profile-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
-}
-
-.profile-img {
-  width: 250px;
-  height: 250px;
-
-  border-radius: 50%;
-  object-fit: cover;
-
-  border: 3px solid var(--primary);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.profile-img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* =========================================================
-   COMMON SECTION STYLING
-   ========================================================= */
-section {
-  padding: 90px 8%;
-}
-
-section h2 {
-  text-align: center;
-  margin-bottom: 40px;
-  font-size: 30px;
-  color: var(--primary);
-}
-
-/* =========================================================
-   SUMMARY SECTION
-   ========================================================= */
-.summary-box {
-  background: var(--card);
-  padding: 25px;
-  border-radius: 8px;
-  line-height: 1.6;
-}
-
-/* =========================================================
-   STATS SECTION
-   ========================================================= */
-/* =========================
-   STATS SECTION
-   ========================= */
-#stats {
-  background: #eaeaea;
-  padding: 60px 5%;
-}
-
-.stats-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  text-align: center;
-}
-
-/* BOX */
-.stat-box {
-  padding: 40px 20px;
-  position: relative;
-  transition: 0.3s ease;
-}
-
-/* DIVIDER */
-.stat-box:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 20%;
-  width: 1px;
-  height: 60%;
-  background: rgba(0,0,0,0.2);
-}
-
-/* =========================
-   3D ICON STYLE
-   ========================= */
-.stat-icon i {
-  font-size: 45px;
-  color: #d62828;
-
-  display: inline-block;
-
-  transform: perspective(600px) rotateX(20deg) translateZ(20px);
-
-  text-shadow:
-    0 4px 0 #a61b1b,
-    0 8px 10px rgba(0,0,0,0.3),
-    0 12px 20px rgba(0,0,0,0.2);
-
-  transition: 0.4s ease;
-}
-
-/* HOVER EFFECT */
-.stat-box:hover .stat-icon i {
-  transform: perspective(600px) rotateX(0deg) scale(1.2) translateY(-5px);
-
-  text-shadow:
-    0 6px 15px rgba(0,0,0,0.4),
-    0 10px 25px rgba(0,0,0,0.3);
-}
-
-/* NUMBER */
-.stat-box h2 {
-  font-size: 60px;
-  color: #000;
-  font-weight: bold;
-}
-
-/* TEXT */
-.stat-box p {
-  font-size: 18px;
-  color: #000;
-  margin-top: 10px;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-
-  .stats-container {
-    grid-template-columns: 1fr;
-  }
-
-  .stat-box:not(:last-child)::after {
-    display: none;
-  }
-
-  .stat-box {
-    border-bottom: 1px solid rgba(0,0,0,0.2);
-  }
-
-  .stat-box:last-child {
-    border-bottom: none;
-  }
-
-  .stat-box h2 {
-    font-size: 40px;
-  }
-}
-
-/* =========================================================
-   EXPERIENCE SECTION
-   ========================================================= */
-.exp-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-}
-
-.exp-card {
-  background: var(--card);
-  padding: 25px;
-  border-radius: 10px;
-
-  text-align: center;
-
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-  transition: 0.3s ease;
-}
-
-.exp-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-}
-
-
-
-/* =========================================================
-   SKILLS SECTION
-   ========================================================= */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 20px;
-}
-
-.skill-card {
-  background: var(--card);
-  padding: 20px;
-
-  text-align: center;
-  border-radius: 8px;
-
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  transition: 0.3s ease;
-}
-
-.skill-card:hover {
-  transform: translateY(-5px);
-  border-bottom: 3px solid var(--primary);
-}
-
-/* =========================================================
-   PROJECTS SECTION
-   ========================================================= */
-.projects-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-}
-
-.project-card {
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-
-  border-radius: 12px;
-  overflow: hidden;
-
-  text-decoration: none;
-  color: var(--text);
-
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-}
-
-.project-card img {
-  width: 100%;
-  height: 170px;
-  object-fit: cover;
-}
-
-.project-content {
-  padding: 15px;
-  text-align: center;
-}
-
-.project-content h3 {
-  margin-bottom: 8px;
-  color: var(--primary);
-}
-
-.project-content p {
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-.project-skills {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px;
-}
-
-.project-skills span {
-  background: var(--primary);
-  color: #ffffff;
-
-  padding: 4px 8px;
-  font-size: 12px;
-  border-radius: 4px;
-}
-
-/* =========================================================
-   PAGE LOADER
-   ========================================================= */
-/* =========================
-   CLICK LOADER (SAFE)
-   ========================= */
-#click-loader {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.95);
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-
-  z-index: 99999;
-  color: white;
-}
-
-.loader-bar {
-  width: 220px;
-  height: 4px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.loader-progress {
-  width: 0%;
-  height: 100%;
-  background: white;
-}
-
-.loader-text {
-  font-size: 18px;
-}
-
-.loader-percent {
-  font-size: 14px;
-}
-
-
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-footer {
-  background: var(--primary);
-  color: #ffffff;
-  padding: 25px 10%;
-}
-
-.footer-icons {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.footer-left,
-.footer-center,
-.footer-right {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.footer-left { align-items: flex-start; }
-.footer-center { align-items: center; }
-.footer-right { align-items: flex-end; }
-
-.footer-icons a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  color: #ffffff;
-  transition: 0.3s ease;
-}
-
-.footer-icons a:hover {
-  transform: translateY(-3px);
-}
-
-.footer-icons img {
-  width: 16px;
-  height: 16px;
-  filter: invert(1);
-}
-
-.footer-copy {
-  text-align: center;
-  font-size: 13px;
-  opacity: 0.9;
-}
-
-/* =========================================================
-   LANDING PAGE (FIXED FOR ALL DEVICES)
-   ========================================================= */
-#landing-page {
-  position: fixed;
-  inset: 0;
-
-  background: linear-gradient(135deg, #ff2a2a, #b30000);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  text-align: center;
-
-  animation: landingFade 1s ease forwards;
-
-  z-index: 9999;
-}
-
-#landing-text {
-  font-size: 3rem;
-  letter-spacing: 2px;
-  color: #ffffff;
-
-  text-shadow: 0 0 10px #ff4d4d;
-}
-
-/* CURSOR */
-#cursor {
-  position: fixed;
-  width: 120px;
-  height: 120px;
-
-  background: radial-gradient(circle, rgba(255,255,255,0.4), transparent);
-
-  border-radius: 50%;
-  pointer-events: none;
-
-  transform: translate(-50%, -50%);
-  z-index: 10000;
-}
-
-/* OVERLAY FIXED */
-#overlay {
-  position: fixed;
-  inset: 0;
-
-  background: #000;
-
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-
-  transition: 1s ease;
-  z-index: 10001;
-}
-
-#overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* FIREWORK */
-.firework {
-  position: fixed;
-  width: 6px;
-  height: 6px;
-  background: white;
-  border-radius: 50%;
-
-  animation: explode 1s ease-out forwards;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-/* KEYFRAMES */
-@keyframes landingFade {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes explode {
-  to {
-    transform: translate(var(--dx), var(--dy));
-    opacity: 0;
-  }
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-
-  #landing-text {
-    font-size: 1.8rem;
-  }
-
-  #cursor {
-    display: none;
-  }
-
-  .stats-container {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* =========================================================
-   MOBILE NAVBAR FIX (mobile responsive)
-   ========================================================= */
-@media (max-width: 768px) {
-
-  /* NAVBAR MAIN FIX */
-  nav {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 5%;
-    gap: 10px;
-  }
-
-  /* TITLE */
-  .logo {
-    font-size: 18px;
-    text-align: center;
-  }
-
-  /* NAV LINKS FIX */
-  .nav-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-
-    width: 100%;
-  }
-
-  /* EACH LINK */
-  .nav-links a {
-    font-size: 14px;
-    padding: 4px 6px;
-    white-space: nowrap; /* PREVENT BREAK LIKE "Linked in" */
-  }
-}
-
-
-
-
-
-
-
-/* =========================================================
-
-   PREMIUM 3D CORE SKILLS SECTION
-
-   (Safe - No conflict with existing code)
-
-========================================================= */
-
-/* ========================= */
-/* 3D SKILLS SECTION FINAL */
-/* ========================= */
-
 
-
-#skills-pro {
-  padding: 100px 20px;
-  text-align: center;
-}
-
-.skills-pro-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 50px;
-  justify-items: center;
-}
-
-/* CARD */
-.skill-pro {
-  text-align: center;
-  transition: 0.4s ease;
-}
-
-/* CIRCLE BORDER */
-.circle-wrap {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 2px solid #ccc;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  box-sizing: border-box;
-  transition: 0.4s ease;
-}
-
-/* INNER */
-.circle {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: #fff;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-/* ICON */
-.circle i {
-  font-size: 42px;
-  color: #444;
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-/* TEXT (0.01 DELAY) */
-.skill-pro p {
-  margin-top: 12px;
-  font-weight: 600;
-  color: #333;
-
-  transition:
-    transform 0.3s ease 0.01s,
-    color 0.3s ease 0.01s,
-    letter-spacing 0.3s ease 0.01s;
-}
-
-/* ACTIVE + HOVER */
-.skill-pro.active .circle-wrap,
-.skill-pro:hover .circle-wrap {
-  border-color: red;
-  transform: scale(1.1);
-}
-
-.skill-pro.active .circle i,
-.skill-pro:hover .circle i {
-  color: red;
-  transform: scale(1.2);
-}
-
-.skill-pro.active p,
-.skill-pro:hover p {
-  color: red;
-  transform: translateY(-3px);
-  letter-spacing: 0.5px;
-}
-
-/* RETURN SMOOTH */
-.circle.reset {
-  transform: translate(0,0) scale(1);
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .skills-pro-container {
-    grid-template-columns: 1fr;
-  }
-}
+:root{
+  --bg:#eeeeee;
+  --text:#111;
+  --card:#fff;
+  --primary:#d62828;
+  --radius:14px;
+  --shadow:0 8px 24px rgba(0,0,0,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+.section{padding:90px 8%}
+.section-title{font-size:2.2rem;color:var(--primary);text-align:center;margin-bottom:12px}
+.section-description{max-width:760px;margin:0 auto 40px;text-align:center}
+nav{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:16px 8%;background:var(--primary);color:#fff;z-index:999}
+.nav-links{display:flex;gap:18px}
+.nav-links a{color:#fff}
+.btn-primary,.btn-outline{display:inline-block;padding:12px 24px;border-radius:8px;font-weight:bold;transition:.3s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-outline{border:2px solid var(--primary);color:var(--primary)}
+.projects-grid,.skills-grid,.contact-grid{display:grid;gap:24px}
+.projects-grid{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.project-card,.contact-card,.skill-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transition:.3s}
+.project-card:hover,.contact-card:hover,.skill-card:hover{transform:translateY(-6px)}
+.project-body{padding:20px}
+.project-tech{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.project-tech span{background:var(--primary);color:#fff;padding:4px 10px;border-radius:999px;font-size:.85rem}
+.footer-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;padding:40px 8%;background:var(--primary);color:#fff}
+.footer-bottom{text-align:center;background:#b91f1f;color:#fff;padding:16px}
+#backToTop{position:fixed;right:20px;bottom:20px;width:48px;height:48px;border:none;border-radius:50%;background:var(--primary);color:#fff;cursor:pointer}
+@media(max-width:768px){
+ nav{flex-direction:column;gap:10px}
+ .nav-links{flex-wrap:wrap;justify-content:center}
+ .section{padding:70px 5%}
+}
+/* Reserved for future section 1 */
+/* Reserved for future section 2 */
+/* Reserved for future section 3 */
+/* Reserved for future section 4 */
+/* Reserved for future section 5 */
+/* Reserved for future section 6 */
+/* Reserved for future section 7 */
+/* Reserved for future section 8 */
+/* Reserved for future section 9 */
+/* Reserved for future section 10 */
+/* Reserved for future section 11 */
+/* Reserved for future section 12 */
+/* Reserved for future section 13 */
+/* Reserved for future section 14 */
+/* Reserved for future section 15 */
+/* Reserved for future section 16 */
+/* Reserved for future section 17 */
+/* Reserved for future section 18 */
+/* Reserved for future section 19 */
+/* Reserved for future section 20 */
+/* Reserved for future section 21 */
+/* Reserved for future section 22 */
+/* Reserved for future section 23 */
+/* Reserved for future section 24 */
+/* Reserved for future section 25 */
+/* Reserved for future section 26 */
+/* Reserved for future section 27 */
+/* Reserved for future section 28 */
+/* Reserved for future section 29 */
+/* Reserved for future section 30 */
+/* Reserved for future section 31 */
+/* Reserved for future section 32 */
+/* Reserved for future section 33 */
+/* Reserved for future section 34 */
+/* Reserved for future section 35 */
+/* Reserved for future section 36 */
+/* Reserved for future section 37 */
+/* Reserved for future section 38 */
+/* Reserved for future section 39 */
+/* Reserved for future section 40 */
+/* Reserved for future section 41 */
+/* Reserved for future section 42 */
+/* Reserved for future section 43 */
+/* Reserved for future section 44 */
+/* Reserved for future section 45 */
+/* Reserved for future section 46 */
+/* Reserved for future section 47 */
+/* Reserved for future section 48 */
+/* Reserved for future section 49 */
+/* Reserved for future section 50 */
+/* Reserved for future section 51 */
+/* Reserved for future section 52 */
+/* Reserved for future section 53 */
+/* Reserved for future section 54 */
+/* Reserved for future section 55 */
+/* Reserved for future section 56 */
+/* Reserved for future section 57 */
+/* Reserved for future section 58 */
+/* Reserved for future section 59 */
+/* Reserved for future section 60 */
+/* Reserved for future section 61 */
+/* Reserved for future section 62 */
+/* Reserved for future section 63 */
+/* Reserved for future section 64 */
+/* Reserved for future section 65 */
+/* Reserved for future section 66 */
+/* Reserved for future section 67 */
+/* Reserved for future section 68 */
+/* Reserved for future section 69 */
+/* Reserved for future section 70 */
+/* Reserved for future section 71 */
+/* Reserved for future section 72 */
+/* Reserved for future section 73 */
+/* Reserved for future section 74 */
+/* Reserved for future section 75 */
+/* Reserved for future section 76 */
+/* Reserved for future section 77 */
+/* Reserved for future section 78 */
+/* Reserved for future section 79 */
+/* Reserved for future section 80 */
+/* Reserved for future section 81 */
+/* Reserved for future section 82 */
+/* Reserved for future section 83 */
+/* Reserved for future section 84 */
+/* Reserved for future section 85 */
+/* Reserved for future section 86 */
+/* Reserved for future section 87 */
+/* Reserved for future section 88 */
+/* Reserved for future section 89 */
+/* Reserved for future section 90 */
+/* Reserved for future section 91 */
+/* Reserved for future section 92 */
+/* Reserved for future section 93 */
+/* Reserved for future section 94 */
+/* Reserved for future section 95 */
+/* Reserved for future section 96 */
+/* Reserved for future section 97 */
+/* Reserved for future section 98 */
+/* Reserved for future section 99 */
+/* Reserved for future section 100 */
+/* Reserved for future section 101 */
+/* Reserved for future section 102 */
+/* Reserved for future section 103 */
+/* Reserved for future section 104 */
+/* Reserved for future section 105 */
+/* Reserved for future section 106 */
+/* Reserved for future section 107 */
+/* Reserved for future section 108 */
+/* Reserved for future section 109 */
+/* Reserved for future section 110 */
+/* Reserved for future section 111 */
+/* Reserved for future section 112 */
+/* Reserved for future section 113 */
+/* Reserved for future section 114 */
+/* Reserved for future section 115 */
+/* Reserved for future section 116 */
+/* Reserved for future section 117 */
+/* Reserved for future section 118 */
+/* Reserved for future section 119 */
+/* Reserved for future section 120 */
+/* Reserved for future section 121 */
+/* Reserved for future section 122 */
+/* Reserved for future section 123 */
+/* Reserved for future section 124 */
+/* Reserved for future section 125 */
+/* Reserved for future section 126 */
+/* Reserved for future section 127 */
+/* Reserved for future section 128 */
+/* Reserved for future section 129 */
+/* Reserved for future section 130 */
+/* Reserved for future section 131 */
+/* Reserved for future section 132 */
+/* Reserved for future section 133 */
+/* Reserved for future section 134 */
+/* Reserved for future section 135 */
+/* Reserved for future section 136 */
+/* Reserved for future section 137 */
+/* Reserved for future section 138 */
+/* Reserved for future section 139 */
+/* Reserved for future section 140 */
+/* Reserved for future section 141 */
+/* Reserved for future section 142 */
+/* Reserved for future section 143 */
+/* Reserved for future section 144 */
+/* Reserved for future section 145 */
+/* Reserved for future section 146 */
+/* Reserved for future section 147 */
+/* Reserved for future section 148 */
+/* Reserved for future section 149 */
+/* Reserved for future section 150 */
+/* Reserved for future section 151 */
+/* Reserved for future section 152 */
+/* Reserved for future section 153 */
+/* Reserved for future section 154 */
+/* Reserved for future section 155 */
+/* Reserved for future section 156 */
+/* Reserved for future section 157 */
+/* Reserved for future section 158 */
+/* Reserved for future section 159 */
+/* Reserved for future section 160 */
+/* Reserved for future section 161 */
+/* Reserved for future section 162 */
+/* Reserved for future section 163 */
+/* Reserved for future section 164 */
+/* Reserved for future section 165 */
+/* Reserved for future section 166 */
+/* Reserved for future section 167 */
+/* Reserved for future section 168 */
+/* Reserved for future section 169 */
+/* Reserved for future section 170 */
+/* Reserved for future section 171 */
+/* Reserved for future section 172 */
+/* Reserved for future section 173 */
+/* Reserved for future section 174 */
+/* Reserved for future section 175 */
+/* Reserved for future section 176 */
+/* Reserved for future section 177 */
+/* Reserved for future section 178 */
+/* Reserved for future section 179 */
+/* Reserved for future section 180 */
+/* Reserved for future section 181 */
+/* Reserved for future section 182 */
+/* Reserved for future section 183 */
+/* Reserved for future section 184 */
+/* Reserved for future section 185 */
+/* Reserved for future section 186 */
+/* Reserved for future section 187 */
+/* Reserved for future section 188 */
+/* Reserved for future section 189 */
+/* Reserved for future section 190 */
+/* Reserved for future section 191 */
+/* Reserved for future section 192 */
+/* Reserved for future section 193 */
+/* Reserved for future section 194 */
+/* Reserved for future section 195 */
+/* Reserved for future section 196 */
+/* Reserved for future section 197 */
+/* Reserved for future section 198 */
+/* Reserved for future section 199 */
+/* Reserved for future section 200 */
+/* Reserved for future section 201 */
+/* Reserved for future section 202 */
+/* Reserved for future section 203 */
+/* Reserved for future section 204 */
+/* Reserved for future section 205 */
+/* Reserved for future section 206 */
+/* Reserved for future section 207 */
+/* Reserved for future section 208 */
+/* Reserved for future section 209 */
+/* Reserved for future section 210 */
+/* Reserved for future section 211 */
+/* Reserved for future section 212 */
+/* Reserved for future section 213 */
+/* Reserved for future section 214 */
+/* Reserved for future section 215 */
+/* Reserved for future section 216 */
+/* Reserved for future section 217 */
+/* Reserved for future section 218 */
+/* Reserved for future section 219 */
+/* Reserved for future section 220 */
+/* Reserved for future section 221 */
+/* Reserved for future section 222 */
+/* Reserved for future section 223 */
+/* Reserved for future section 224 */
+/* Reserved for future section 225 */
+/* Reserved for future section 226 */
+/* Reserved for future section 227 */
+/* Reserved for future section 228 */
+/* Reserved for future section 229 */
+/* Reserved for future section 230 */
+/* Reserved for future section 231 */
+/* Reserved for future section 232 */
+/* Reserved for future section 233 */
+/* Reserved for future section 234 */
+/* Reserved for future section 235 */
+/* Reserved for future section 236 */
+/* Reserved for future section 237 */
+/* Reserved for future section 238 */
+/* Reserved for future section 239 */
+/* Reserved for future section 240 */
+/* Reserved for future section 241 */
+/* Reserved for future section 242 */
+/* Reserved for future section 243 */
+/* Reserved for future section 244 */
+/* Reserved for future section 245 */
+/* Reserved for future section 246 */
+/* Reserved for future section 247 */
+/* Reserved for future section 248 */
+/* Reserved for future section 249 */
+/* Reserved for future section 250 */
+/* Reserved for future section 251 */
+/* Reserved for future section 252 */
+/* Reserved for future section 253 */
+/* Reserved for future section 254 */
+/* Reserved for future section 255 */
+/* Reserved for future section 256 */
+/* Reserved for future section 257 */
+/* Reserved for future section 258 */
+/* Reserved for future section 259 */
+/* Reserved for future section 260 */
+/* Reserved for future section 261 */
+/* Reserved for future section 262 */
+/* Reserved for future section 263 */
+/* Reserved for future section 264 */
+/* Reserved for future section 265 */
+/* Reserved for future section 266 */
+/* Reserved for future section 267 */
+/* Reserved for future section 268 */
+/* Reserved for future section 269 */
+/* Reserved for future section 270 */
+/* Reserved for future section 271 */
+/* Reserved for future section 272 */
+/* Reserved for future section 273 */
+/* Reserved for future section 274 */
+/* Reserved for future section 275 */
+/* Reserved for future section 276 */
+/* Reserved for future section 277 */
+/* Reserved for future section 278 */
+/* Reserved for future section 279 */
+/* Reserved for future section 280 */
+/* Reserved for future section 281 */
+/* Reserved for future section 282 */
+/* Reserved for future section 283 */
+/* Reserved for future section 284 */
+/* Reserved for future section 285 */
+/* Reserved for future section 286 */
+/* Reserved for future section 287 */
+/* Reserved for future section 288 */
+/* Reserved for future section 289 */
+/* Reserved for future section 290 */
+/* Reserved for future section 291 */
+/* Reserved for future section 292 */
+/* Reserved for future section 293 */
+/* Reserved for future section 294 */
+/* Reserved for future section 295 */
+/* Reserved for future section 296 */
+/* Reserved for future section 297 */
+/* Reserved for future section 298 */
+/* Reserved for future section 299 */
+/* Reserved for future section 300 */
+/* Reserved for future section 301 */
+/* Reserved for future section 302 */
+/* Reserved for future section 303 */
+/* Reserved for future section 304 */
+/* Reserved for future section 305 */
+/* Reserved for future section 306 */
+/* Reserved for future section 307 */
+/* Reserved for future section 308 */
+/* Reserved for future section 309 */
+/* Reserved for future section 310 */
+/* Reserved for future section 311 */
+/* Reserved for future section 312 */
+/* Reserved for future section 313 */
+/* Reserved for future section 314 */
+/* Reserved for future section 315 */
+/* Reserved for future section 316 */
+/* Reserved for future section 317 */
+/* Reserved for future section 318 */
+/* Reserved for future section 319 */
+/* Reserved for future section 320 */
+/* Reserved for future section 321 */
+/* Reserved for future section 322 */
+/* Reserved for future section 323 */
+/* Reserved for future section 324 */
+/* Reserved for future section 325 */
+/* Reserved for future section 326 */
+/* Reserved for future section 327 */
+/* Reserved for future section 328 */
+/* Reserved for future section 329 */
+/* Reserved for future section 330 */
+/* Reserved for future section 331 */
+/* Reserved for future section 332 */
+/* Reserved for future section 333 */
+/* Reserved for future section 334 */
+/* Reserved for future section 335 */
+/* Reserved for future section 336 */
+/* Reserved for future section 337 */
+/* Reserved for future section 338 */
+/* Reserved for future section 339 */
+/* Reserved for future section 340 */
+/* Reserved for future section 341 */
+/* Reserved for future section 342 */
+/* Reserved for future section 343 */
+/* Reserved for future section 344 */
+/* Reserved for future section 345 */
+/* Reserved for future section 346 */
+/* Reserved for future section 347 */
+/* Reserved for future section 348 */
+/* Reserved for future section 349 */
+/* Reserved for future section 350 */
+/* Reserved for future section 351 */
+/* Reserved for future section 352 */
+/* Reserved for future section 353 */
+/* Reserved for future section 354 */
+/* Reserved for future section 355 */
+/* Reserved for future section 356 */
+/* Reserved for future section 357 */
+/* Reserved for future section 358 */
+/* Reserved for future section 359 */
+/* Reserved for future section 360 */
+/* Reserved for future section 361 */
+/* Reserved for future section 362 */
+/* Reserved for future section 363 */
+/* Reserved for future section 364 */
+/* Reserved for future section 365 */
+/* Reserved for future section 366 */
+/* Reserved for future section 367 */
+/* Reserved for future section 368 */
+/* Reserved for future section 369 */
+/* Reserved for future section 370 */
+/* Reserved for future section 371 */
+/* Reserved for future section 372 */
+/* Reserved for future section 373 */
+/* Reserved for future section 374 */
+/* Reserved for future section 375 */
+/* Reserved for future section 376 */
+/* Reserved for future section 377 */
+/* Reserved for future section 378 */
+/* Reserved for future section 379 */
+/* Reserved for future section 380 */
+/* Reserved for future section 381 */
+/* Reserved for future section 382 */
+/* Reserved for future section 383 */
+/* Reserved for future section 384 */
+/* Reserved for future section 385 */
+/* Reserved for future section 386 */
+/* Reserved for future section 387 */
+/* Reserved for future section 388 */
+/* Reserved for future section 389 */
+/* Reserved for future section 390 */
+/* Reserved for future section 391 */
+/* Reserved for future section 392 */
+/* Reserved for future section 393 */
+/* Reserved for future section 394 */
+/* Reserved for future section 395 */
+/* Reserved for future section 396 */
+/* Reserved for future section 397 */
+/* Reserved for future section 398 */
+/* Reserved for future section 399 */
+/* Reserved for future section 400 */
